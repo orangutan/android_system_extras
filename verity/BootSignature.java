@@ -248,11 +248,14 @@ public class BootSignature extends ASN1Object
         byte[] image = Utils.read(imagePath);
         int signableSize = getSignableImageSize(image);
 
+	// this causes the boot images with verity to get truncated.
+	// commenting it out for now
+	/*
         if (signableSize < image.length) {
             System.err.println("NOTE: truncating file " + imagePath +
                     " from " + image.length + " to " + signableSize + " bytes");
             image = Arrays.copyOf(image, signableSize);
-        } else if (signableSize > image.length) {
+        } else */if (signableSize > image.length) {
             throw new IllegalArgumentException("Invalid image: too short, expected " +
                     signableSize + " bytes");
         }
